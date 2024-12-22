@@ -5,8 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: '<router-outlet/>'//Se usa solo si se tiene un template pequeño
 })
 export class AppComponent {
   title = 'store';
