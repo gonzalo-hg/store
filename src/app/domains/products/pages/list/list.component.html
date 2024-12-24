@@ -1,7 +1,15 @@
-<div class="grid grid-cols-3">
-    <app-product></app-product>
-    <app-product></app-product>
-    <app-product></app-product>
-    <app-product></app-product>
-    <app-product></app-product>
+<div class="grid grid-cols-3 gap-8">
+    <app-product [title]="'Producto 1'" [price]="11" img="https://picsum.photos/200/300?r=21" (addToCart)="fromChild($event)"></app-product>
+    <app-product [title]="'Producto 2'" [price]="12" img="https://picsum.photos/200/300?r=22" (addToCart)="fromChild($event)"></app-product>
+    <app-product [title]="'Producto 3'" [price]="13" img="https://picsum.photos/200/300?r=23" (addToCart)="fromChild($event)"></app-product>
+    <app-product [title]="'Producto 4'" [price]="14" img="https://picsum.photos/200/300?r=24" (addToCart)="fromChild($event)"></app-product>
+    <app-product [title]="'Producto 5'" [price]="15" img="https://picsum.photos/200/300?r=25" (addToCart)="fromChild($event)"></app-product>
 </div>
+
+<!-- @input 
+inputs la forma en que se le envia informadio de un padre a un hijo 
+padre -> hijo
+@output
+Es cuando el hijo ahora quiere enviar informacion al padre
+hijo -> padre
+ --> 

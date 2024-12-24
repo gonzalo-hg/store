@@ -11,4 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class ListComponent {
 
+  fromChild(event: Event){
+    console.log('Este fue un click desde el parent', event);
+    console.log(event);
+  }
+
 }
