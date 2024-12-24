@@ -19,6 +19,7 @@ export class CounterComponent {
   constructor() {
     //NO ASYNC
     //before render
+    //corre una vez
     console.log('Constructor');
     console.log('-'.repeat(10));
   }
@@ -29,5 +30,33 @@ export class CounterComponent {
     console.log('-'.repeat(10));
     console.log(changes)
   }
+
+  ngOnInit(){
+    //after render
+    //corre una vez
+    //perfecto para cosas asincronas async, then, subs y observables
+    console.log('ngOnInit');
+    console.log('-'.repeat(10));
+    console.log('duration =>', this.duration);
+    console.log('message =>', this.message);
+  }
+
+  
+  /**
+   * Lifecycle hook that is called after a component's view has been fully initialized.
+   * This method is called once after the first `ngAfterContentChecked` call.
+   * 
+   * Here, it logs a message to the console and prints a separator line.
+   */
+  ngAfterViewInit(){
+    console.log('ngAfterViewInit');
+    console.log('-'.repeat(20));
+  }
+
+  ngOnDestroy(){
+    console.log('ngOnDrestroy');
+    console.log('-'.repeat(20));
+  }
+
 
 }
