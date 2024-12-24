@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.css'
 })
@@ -22,7 +23,7 @@ export class CounterComponent {
     console.log('-'.repeat(10));
   }
 
-  ngOnchanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges){
     //before and during render
     console.log('ngOnchanges');
     console.log('-'.repeat(10));
