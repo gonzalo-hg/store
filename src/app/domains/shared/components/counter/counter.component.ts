@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, signal, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -15,6 +15,8 @@ export class CounterComponent {
    */
   @Input({required:true }) duration: number = 0;
   @Input({required:true }) message = '';//esto representa el motor de inferencia de ts y el tipado de angular
+  counter = signal(0);
+  counterRef: number | undefined;
 
   constructor() {
     //NO ASYNC
@@ -29,6 +31,11 @@ export class CounterComponent {
     console.log('ngOnchanges');
     console.log('-'.repeat(10));
     console.log(changes)
+    const duration = changes['duration'];
+    console.log('duration =>', duration);
+    if(duration && duration.currentValue != duration.previousValue){
+      this.doSomething();
+    }
   }
 
   ngOnInit(){
@@ -39,6 +46,10 @@ export class CounterComponent {
     console.log('-'.repeat(10));
     console.log('duration =>', this.duration);
     console.log('message =>', this.message);
+    this.counterRef = window.setInterval(() => {
+      console.log('run Interval');
+      this.counter.update(statePrev => statePrev + 1);
+    },1000)
   }
 
   
@@ -56,6 +67,12 @@ export class CounterComponent {
   ngOnDestroy(){
     console.log('ngOnDrestroy');
     console.log('-'.repeat(20));
+    window.clearInterval(this.counterRef);
+  }
+
+  doSomething(){
+    console.log('Hago algo');
+    //corre cualquier cosa sincrona o asincrona
   }
 
 
