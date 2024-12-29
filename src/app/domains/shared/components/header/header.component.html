@@ -64,6 +64,16 @@
                     </div>
 
                 </div>
+                <!--
+                    This code snippet displays the total calculated by the `calcularTotal` function.
+                    Note: It is not a good practice to use functions within string interpolation in Angular templates,
+                    as it can lead to performance issues due to frequent change detection cycles.
+                <div>
+                    <p>Total {{calcularTotal()}}</p>
+                </div>-->
+                <div>
+                    <p>Total {{total()}}</p>
+                </div>
             </div>
         <ng-template #emputyCart>
             <p class="text-center text-gray-500">No hay productos en el carrito</p>
