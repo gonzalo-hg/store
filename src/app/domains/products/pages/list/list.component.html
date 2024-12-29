@@ -1,0 +1,16 @@
+<div class="container mx-auto">
+    <app-header [cart]="cart()"></app-header>
+    <div class="grid grid-cols-4 gap-8 mt-5">
+        <app-product *ngFor="let product of products()" [product]="product" (addToCart)="addToCart($event)">
+        </app-product>
+    </div>
+</div>
+
+
+<!-- @input 
+inputs la forma en que se le envia informadio de un padre a un hijo 
+padre -> hijo
+@output
+Es cuando el hijo ahora quiere enviar informacion al padre
+hijo -> padre
+ -->
