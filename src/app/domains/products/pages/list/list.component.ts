@@ -14,6 +14,7 @@ import { HeaderComponent } from './../../../shared/components/header/header.comp
 export class ListComponent {
 
   products = signal<Product[]>([])
+  cart = signal<Product[]>([])
 
   constructor() {
     const initProducts: Product[] = [{
@@ -39,32 +40,36 @@ export class ListComponent {
     },
     {
       id: Date.now(),
-      title: 'Producto 1',
+      title: 'Producto 4',
       price: 1000,
-      image: 'https://picsum.photos/200/300?r=21',
+      image: 'https://picsum.photos/200/300?r=24',
       creationAt: new Date().toISOString()
     },
     {
       id: Date.now(),
-      title: 'Producto 2',
+      title: 'Producto 5',
       price: 1002,
-      image: 'https://picsum.photos/200/300?r=22',
+      image: 'https://picsum.photos/200/300?r=25',
       creationAt: new Date().toISOString()
     },
     {
       id: Date.now(),
-      title: 'Producto 3',
+      title: 'Producto 6',
       price: 1003,
-      image: 'https://picsum.photos/200/300?r=23',
+      image: 'https://picsum.photos/200/300?r=26',
       creationAt: new Date().toISOString()
     }
     ];
     this.products.set(initProducts);
   }
 
-  fromChild(event: Event) {
-    console.log('Este fue un click desde el parent', event);
-    console.log(event);
+  /**
+   * Handles events emitted from a child component.
+   * 
+   * @param event - The event object emitted from the child component.
+   */
+  addToCart(product: Product) {
+    this.cart.update(prevState => [...prevState, product]);
   }
 
 }
