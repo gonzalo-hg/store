@@ -1,8 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { ProductComponent } from '../../components/product/product.component';
+import { Component, inject, signal } from '@angular/core';
+import { ProductComponent } from '@products/components/product/product.component';
 import { CommonModule } from '@angular/common';
-import { Product } from './../../../shared/models/product.model';
-import { HeaderComponent } from './../../../shared/components/header/header.component';
+import { Product } from '@shared/models/product.model';
+import { HeaderComponent } from '@shared/components/header/header.component';
+import { CartService } from '@shared/services/cart.service';
+import { ProductService } from '@shared/services/product.service';
 
 @Component({
   selector: 'app-list',
@@ -14,53 +16,21 @@ import { HeaderComponent } from './../../../shared/components/header/header.comp
 export class ListComponent {
 
   products = signal<Product[]>([])
-  cart = signal<Product[]>([])
+  private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-  constructor() {
-    const initProducts: Product[] = [{
-      id: Date.now(),
-      title: 'Producto 1',
-      price: 1000,
-      image: 'https://picsum.photos/200/300?r=21',
-      creationAt: new Date().toISOString()
-    },
-    {
-      id: Date.now(),
-      title: 'Producto 2',
-      price: 1002,
-      image: 'https://picsum.photos/200/300?r=22',
-      creationAt: new Date().toISOString()
-    },
-    {
-      id: Date.now(),
-      title: 'Producto 3',
-      price: 1003,
-      image: 'https://picsum.photos/200/300?r=23',
-      creationAt: new Date().toISOString()
-    },
-    {
-      id: Date.now(),
-      title: 'Producto 4',
-      price: 1000,
-      image: 'https://picsum.photos/200/300?r=24',
-      creationAt: new Date().toISOString()
-    },
-    {
-      id: Date.now(),
-      title: 'Producto 5',
-      price: 1002,
-      image: 'https://picsum.photos/200/300?r=25',
-      creationAt: new Date().toISOString()
-    },
-    {
-      id: Date.now(),
-      title: 'Producto 6',
-      price: 1003,
-      image: 'https://picsum.photos/200/300?r=26',
-      creationAt: new Date().toISOString()
-    }
-    ];
-    this.products.set(initProducts);
+  ngOnInit() {
+    this.productService.getProducts()
+    .subscribe({
+      next: (products) => {
+        this.products.set(products);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+      
+    });
+
   }
 
   /**
@@ -69,7 +39,7 @@ export class ListComponent {
    * @param event - The event object emitted from the child component.
    */
   addToCart(product: Product) {
-    this.cart.update(prevState => [...prevState, product]);
+    this.cartService.addToCart(product);
   }
 
 }
